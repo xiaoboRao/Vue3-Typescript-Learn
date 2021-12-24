@@ -4,6 +4,13 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { DefinePlugin } = require("webpack");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
+
+  //设置模式
+  //development 开发阶段
+  //production 准备打包上线阶段
+  mode: "development",
+  //建立js映射文件，方便调试代码和错误
+  devtool:"source-map",
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "./build"),
@@ -12,7 +19,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/, //匹配css结尾
+        test: /\.css$/, //匹配css结尾  
         use: [
           //1.
           //1{loader:'css-loader'}
@@ -75,6 +82,24 @@ module.exports = {
             }
           }
 
+      },
+      // {
+      //   test: /\.js$/,
+      //   use:{
+      //     loader:"babel-loader",
+      //     options:{
+      //       // plugins:["@babel/plugin-transform-arrow-functions"]
+      //       //babel对js预设的设置，还可以单独放到一个独立的配置文件
+      //       presets:[
+      //         "@babel/preset-env"
+      //       ]
+            
+      //     }
+      //   }
+      // },
+      {
+        test:/\.js$/,
+        use:"babel-loader", 
       },
       {
         

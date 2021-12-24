@@ -15,6 +15,8 @@ bgEle.className="bg-img"
 const imgEl=document.createElement("img");
 imgEl.src=bgImg;
 
+//测试source-map
+// console.log(content.length);
 // i元素
 const iEl = document.createElement('i');
 iEl.className = "iconfont icon-ashbin";
