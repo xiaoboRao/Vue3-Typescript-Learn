@@ -3,6 +3,7 @@ import { sum } from "./js/math";
 import { createApp } from 'vue';
 const { priceFormate } = require('./js/formate');
 import './js/element';
+
 import App from "../src/vue/App.vue"
 
 console.log(sum(10, 20));

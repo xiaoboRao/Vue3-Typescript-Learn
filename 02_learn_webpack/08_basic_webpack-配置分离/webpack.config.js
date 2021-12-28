@@ -6,6 +6,39 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader/dist/index');
 module.exports = {
 
+  target:"web",
+  devServer:{
+    //当index.html script访问不到资源时，加载这个资源文件夹，一般用在开发阶段，避免频繁copy耗费性能
+    //contentBase/contentBasePublicPath/serveIndex/watchContentBase/watchOptions/staticOptions options were moved to static option
+    //现在用contentBase会报错
+    static: "./public",
+    hot:true,
+    port:8081,
+    // compress:true //开启gzip压缩
+    //"/api"映射， 开启代理，解决跨域问题，
+    proxy:{
+      
+      "/api":{
+        target:"http://localhost:8888",
+        //不把/api写进路径
+        pathRewrite:{
+          "^/api":""
+        },
+        secure:false,
+        changeOrigin:true
+      }
+    }
+
+  },
+  resolve:{
+    //当引用以下结尾的文件时，不需要加后缀
+    extensions:[".js",".json",".mjs","ts",".vue",".tsx",".jsx"],
+    alias:{
+      //配置别名
+      "@":path.resolve(__dirname,'./src'),
+      "js":path.resolve(__dirname,'./src/js'),
+    }
+  },
   //设置模式
   //development 开发阶段
   //production 准备打包上线阶段
@@ -42,7 +75,35 @@ module.exports = {
         use: ["style-loader", "css-loader", "less-loader"],
       },
       {
-      
+        // test: /\.(jpe?g|png|gif|svg)$/,
+        // use: [{
+        //   loader: "file-loader",
+        //   options: {
+        //     // outputPath: "img",
+        //     //可以直接写路径名
+        //     name: "img/[name]_[hash:6].[ext]",
+        //   },
+        //webpack5不再使用url-loader，file-loader，要使用要配置，esModule:false，type: 'javascript/auto'
+        // loader: "url-loader",
+        //   options: {
+        //     // outputPath: "img",
+        //     //可以直接写路径名
+        //     name: "img/[name]_[hash:6].[ext]",
+        //     //超过300kb进行base打包到bundle.js
+        //     //好处：小图片合成到bundlejs，减少网络请求
+        //     limit:300*1024,
+        //     esModule:false
+
+        //   },
+        // {
+
+        // }
+
+        // }],
+        //    type: 'javascript/auto'
+
+        //webpack5的写法
+
         test: /\.(jpe?g|png|gif|svg)$/,
         type: "asset",
         generator: {
