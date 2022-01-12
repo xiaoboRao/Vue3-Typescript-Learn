@@ -1,5 +1,7 @@
 <template>
   <div>
+
+    <!-- aaa bbb是修饰符 类似于v-bind.sync -->
     <button v-if="counter < 2" v-why.aaaa.bbbb="'coderwhy'" @click="increment">当前计数: {{counter}}</button>
   </div>
 </template>
@@ -8,11 +10,13 @@
   import { ref } from "vue";
 
   export default {
+   
     // 局部指令
     directives: {
       why: {
         created(el, bindings, vnode, preVnode) {
-          console.log("why created", el, bindings, vnode, preVnode);
+          //是bindings里的参数
+          console.log("why created", el, bindings, vnode, preVnode); 
           console.log(bindings.value);
           console.log(bindings.modifiers);
         },
