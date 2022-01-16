@@ -93,6 +93,6 @@ watchEffect(function () {
 })
 
 // info.counter++;
-// info.name = "why";
+info.name = "why";
 
-foo.height = 2;
+// foo.height = 2;

@@ -18,6 +18,7 @@
       h("h2", null, "当前计数: 100"),
       h("button", {onClick: function() {}}, "+1")
     ]); // vdom
+    console.log("vnode",vnode);
 
     // 2.通过mount函数, 将vnode挂载到div#app上
     mount(vnode, document.querySelector("#app"))
